@@ -1,0 +1,52 @@
+buildscript {
+    repositories {
+        mavenLocal()
+        mavenCentral()
+        maven { url 'https://jitpack.io' }
+        maven { url 'https://maven.google.com'}
+        google()
+    }
+    dependencies {
+        classpath "com.android.tools.build:gradle:7.0.4"
+        classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:1.5.31"
+        def nav_version = "2.3.5"
+        classpath "androidx.navigation:navigation-safe-args-gradle-plugin:$nav_version"
+    }
+}
+
+task clean(type: Delete) {
+    delete rootProject.buildDir
+}
+ext {
+    lifecycle_version = "2.1.0"
+    lifeCycleExtensionVersion = "2.2.0"
+    viewmodel_lifecycle = "2.4.1"
+    viewModelSaveStateVersion = "1.0.0-rc03"
+    retrofitVersion = '2.9.0'
+    daggerVersion = "2.35.1"
+    glideVersion = '4.10.0'
+    glideTransformationVersion = "3.3.0"
+    mockitoVersion = "2.13.0"
+    room_version = "2.4.2"
+    materialDesignVersion = '1.7.0-alpha01'
+    designSupportLib ='1.0.0'
+    puglin_version = "3.5.0"
+    java_version = JavaVersion.VERSION_1_8
+    nav_version = "2.4.2"
+    prefernce_version = "1.1.0"
+    kotlin_coroutines_version = "1.5.2"
+    event_bus_v = "3.1.1"
+    circularImage = '3.1.0'
+    multidex_version = "2.0.1"
+    hamcrest_version = "2.2"
+    junit_version = "1.1.1"
+    view_animator_version = "1.1.0"
+    coroutines_scopes = "2.2.0"
+    stetho = '1.5.1'
+    timberVersion = '4.7.1'
+    lottieVersion = '3.7.0'
+    materialSearchBar = '0.8.2'
+    threeTenAbpVersion = '1.0.5'
+    stfalconImageViewer = '0.5.0'
+    work_version = "2.7.1"
+}
