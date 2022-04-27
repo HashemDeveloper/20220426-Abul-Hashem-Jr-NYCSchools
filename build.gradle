@@ -24,8 +24,8 @@ ext {
     viewModelSaveStateVersion = "1.0.0-rc03"
     retrofitVersion = '2.9.0'
     daggerVersion = "2.35.1"
-    glideVersion = '4.10.0'
-    glideTransformationVersion = "3.3.0"
+    glideVersion = '4.13.0'
+    glideTransformationVersion = "4.3.0"
     mockitoVersion = "2.13.0"
     room_version = "2.4.2"
     materialDesignVersion = '1.7.0-alpha01'
