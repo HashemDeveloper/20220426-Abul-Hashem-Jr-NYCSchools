@@ -12,7 +12,9 @@
         android:theme="@style/Theme.20220426AbulHashemJrNYCSchools">
         <activity
             android:name=".NYCSchoolsMain"
-            android:exported="true">
+            android:exported="true"
+            android:theme="@style/Splash"
+            >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.LAUNCHER" />
