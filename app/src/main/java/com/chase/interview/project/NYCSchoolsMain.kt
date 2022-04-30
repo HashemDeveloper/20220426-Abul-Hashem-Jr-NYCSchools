@@ -1,7 +1,5 @@
 package com.chase.interview.project
 
-import androidx.appcompat.app.AppCompatActivity
-import android.os.Bundle
 import androidx.activity.viewModels
 import com.chase.interview.project.base.BaseActivity
 import com.chase.interview.project.di.ui.withFactory
@@ -40,6 +38,9 @@ class NYCSchoolsMain : BaseActivity(), HasAndroidInjector {
         }
     }
 
+    override fun loadDatFromFile() {
+        this.sharedViewModel.loadSchoolDirectory(this)
+    }
     override fun androidInjector(): AndroidInjector<Any> {
         return this.dispatchingAndroidInjector
     }

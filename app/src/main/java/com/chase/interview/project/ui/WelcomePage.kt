@@ -9,7 +9,6 @@ import com.chase.interview.project.R
 import dagger.android.support.AndroidSupportInjection
 
 class WelcomePage : Fragment() {
-
     override fun onCreate(savedInstanceState: Bundle?) {
         AndroidSupportInjection.inject(this)
         super.onCreate(savedInstanceState)
@@ -19,9 +18,5 @@ class WelcomePage : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         return inflater.inflate(R.layout.fragment_welcome_page, container, false)
-    }
-
-    companion object {
-
     }
 }

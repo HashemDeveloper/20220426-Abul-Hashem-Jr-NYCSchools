@@ -16,6 +16,7 @@ abstract class BaseActivity: AppCompatActivity() {
     protected abstract fun getAppTheme(): Int
     protected abstract fun getNavLayout(): Int
     protected abstract fun getDestination(): Int
+    protected abstract fun loadDatFromFile()
     private lateinit var controller: NavController
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -31,6 +32,7 @@ abstract class BaseActivity: AppCompatActivity() {
         val destination: Int = getDestination()
         navGraph.setStartDestination(destination)
         navController.graph = navGraph
+        loadDatFromFile()
     }
 
     override fun onResume() {
