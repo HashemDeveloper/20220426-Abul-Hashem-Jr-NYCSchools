@@ -21,5 +21,10 @@
         android:id="@+id/schoolDirectoryPage"
         android:name="com.chase.interview.project.ui.SchoolDirectoryPage"
         android:label="fragment_school_directory_page"
-        tools:layout="@layout/fragment_school_directory_page" />
+        tools:layout="@layout/fragment_school_directory_page">
+        <argument
+            android:name="WelcomePage"
+            app:argType="com.chase.interview.project.models.IntentObj"
+            />
+    </fragment>
 </navigation>

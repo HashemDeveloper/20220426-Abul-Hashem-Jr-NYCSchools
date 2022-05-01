@@ -11,7 +11,9 @@ import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.repeatOnLifecycle
 import com.chase.interview.project.R
 import com.chase.interview.project.di.ui.withFactory
+import com.chase.interview.project.models.SchoolDirectoryObj
 import com.chase.interview.project.viewmodel.SharedViewModel
+import com.chase.interview.project.ui.SchoolDirectoryPageArgs.fromBundle
 import dagger.android.support.AndroidSupportInjection
 import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.launch
@@ -22,6 +24,9 @@ class SchoolDirectoryPage : Fragment() {
     lateinit var viewModelFactory: SharedViewModel.Factory
     private val sharedViewModel: SharedViewModel by activityViewModels {
         withFactory(this.viewModelFactory)
+    }
+    private val intentObj by lazy {
+        fromBundle(requireArguments()).welcomePage
     }
     override fun onCreate(savedInstanceState: Bundle?) {
         AndroidSupportInjection.inject(this)
@@ -37,10 +42,13 @@ class SchoolDirectoryPage : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        val neighbor: String = intentObj.data
         viewLifecycleOwner.lifecycleScope.launch {
             viewLifecycleOwner.repeatOnLifecycle(Lifecycle.State.STARTED) {
                 sharedViewModel.schoolDirectories.collect {
-                    print(it)
+                    val schoolDirList: MutableList<SchoolDirectoryObj>? = it?.results?.filter { v -> v.city == neighbor }?.toMutableList()
+                    schoolDirList?.sortBy { it.schoolName }
+                    print(schoolDirList)
                 }
             }
         }
