@@ -4,6 +4,7 @@ import android.content.Context
 import androidx.lifecycle.SavedStateHandle
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.chase.interview.project.data.local.ILocalRepo
 import com.chase.interview.project.data.local.ISharedPrefService
 import com.chase.interview.project.di.ui.ISavedStateViewModel
 import com.chase.interview.project.models.SchoolDirectoryList
@@ -15,7 +16,8 @@ import javax.inject.Inject
 import kotlin.coroutines.CoroutineContext
 
 class SharedViewModel(private val savedStateHandle: SavedStateHandle,
-                      private val iSharedPrefService: ISharedPrefService): ViewModel(), CoroutineScope {
+                      private val iSharedPrefService: ISharedPrefService,private
+                      val iLocalRepo: ILocalRepo): ViewModel(), CoroutineScope {
     private val job = Job()
 
     private val _schoolDirectories: MutableStateFlow<SchoolDirectoryList?> = MutableStateFlow(null)
@@ -23,9 +25,9 @@ class SharedViewModel(private val savedStateHandle: SavedStateHandle,
 
 
     fun loadSchoolDirectory(context: Context) {
-        viewModelScope.launch {
-            _schoolDirectories.value = withContext(Dispatchers.IO) {
-                getSchoolDirectoryFromFile(context)
+        viewModelScope.launch(Dispatchers.IO) {
+            this@SharedViewModel.iLocalRepo.getSchoolDirsFromFile(context).collect {
+                _schoolDirectories.value = it
             }
         }
     }
@@ -42,10 +44,11 @@ class SharedViewModel(private val savedStateHandle: SavedStateHandle,
         return !isFirstTime
     }
     class Factory @Inject constructor(
-        val iSharedPrefService: ISharedPrefService
+        val iSharedPrefService: ISharedPrefService,
+        val iLocalRepo: ILocalRepo
     ): ISavedStateViewModel<SharedViewModel?> {
         override fun create(savedStateHandle: SavedStateHandle): SharedViewModel {
-            return SharedViewModel(savedStateHandle,this.iSharedPrefService)
+            return SharedViewModel(savedStateHandle,this.iSharedPrefService, this.iLocalRepo)
         }
     }
 
