@@ -15,6 +15,6 @@
         <!-- Customize your theme here. -->
     </style>
     <style name="Splash" parent="Theme.20220426AbulHashemJrNYCSchools">
-        <item name="android:windowBackground">@drawable/dr_nyc_splash_screen</item>
+        <item name="android:windowBackground">@drawable/dr_nyc_splash_screen_night</item>
     </style>
 </resources>
