@@ -4,8 +4,9 @@
     <option name="filePathToZoomLevelMap">
       <map>
         <entry key="app/src/main/res/drawable/dr_nyc_splash_screen.xml" value="0.243" />
+        <entry key="app/src/main/res/drawable/dr_nyc_splash_screen_night.xml" value="0.1135" />
         <entry key="app/src/main/res/layout/activity_main.xml" value="0.18333333333333332" />
-        <entry key="app/src/main/res/layout/fragment_school_directory_page.xml" value="0.30503936767578127" />
+        <entry key="app/src/main/res/layout/fragment_school_directory_page.xml" value="0.24193115234375" />
         <entry key="app/src/main/res/layout/fragment_welcome_page.xml" value="0.25128480957378524" />
       </map>
     </option>

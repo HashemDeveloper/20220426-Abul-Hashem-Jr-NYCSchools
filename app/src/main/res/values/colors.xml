@@ -8,4 +8,5 @@
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
     <color name="gray_100">#F5F5F5</color>
+    <color name="filter_color">@color/black</color>
 </resources>
