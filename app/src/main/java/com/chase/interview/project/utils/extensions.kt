@@ -22,6 +22,10 @@ fun readAssetFile(context: Context, fileName: String): String? {
     }
     return json
 }
+
+/**
+ * extracts first word from @param input
+ */
 fun getFirstWord(input: String): String {
     for (i in input.indices) {
         if (input[i] == ' ') {
@@ -30,6 +34,10 @@ fun getFirstWord(input: String): String {
     }
     return input
 }
+/**
+ * Bolds the first word from the sentence. And, if the @param isUnderline is true, will
+ * underline the sentence from the @param end of first bold word. Temporarily using end+1 to start index after the ':'
+ */
 fun boldFirstWord(end: Int, sentence: String, textView: AppCompatTextView, isUnderLine: Boolean) {
     if (sentence.isNotEmpty()) {
         val fancySentence = SpannableStringBuilder(sentence)
@@ -40,13 +48,9 @@ fun boldFirstWord(end: Int, sentence: String, textView: AppCompatTextView, isUnd
             Spannable.SPAN_EXCLUSIVE_EXCLUSIVE
         )
         if (isUnderLine) {
+            //TODO: Check if firstWord.length-1 == ':' if true set pointer to end+1 else set pointer end
             fancySentence.setSpan(UnderlineSpan(), end+1, sentence.length, Spannable.SPAN_EXCLUSIVE_EXCLUSIVE)
         }
         textView.text = fancySentence
     }
-}
-fun underLineText(start: Int, text: String): String {
-    val content = SpannableString(text)
-    content.setSpan(UnderlineSpan(), start, text.length, 0)
-    return content.toString()
 }
