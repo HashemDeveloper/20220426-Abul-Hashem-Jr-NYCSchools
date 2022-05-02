@@ -19,6 +19,7 @@ import com.chase.interview.project.ui.SchoolDirectoryPageArgs.fromBundle
 import dagger.android.support.AndroidSupportInjection
 import kotlinx.android.synthetic.main.fragment_school_directory_page.*
 import kotlinx.coroutines.flow.collect
+import kotlinx.coroutines.flow.map
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
@@ -51,10 +52,11 @@ class SchoolDirectoryPage : Fragment() {
         schoolDirectoryPage_recyclerView_id.adapter = this.schoolDirListAdapter
         viewLifecycleOwner.lifecycleScope.launch {
             viewLifecycleOwner.repeatOnLifecycle(Lifecycle.State.STARTED) {
-                sharedViewModel.schoolDirectories.collect {
-                    val schoolDirList: MutableList<SchoolDirectoryObj>? = it?.results?.filter { v -> v.city == neighbor }?.toMutableList()
-                    schoolDirList?.sortBy { it.schoolName }
-                    this@SchoolDirectoryPage.schoolDirListAdapter.setData(schoolDirList)
+                sharedViewModel.schoolDirectories.map { m->
+                    m?.results?.filter { v -> v.city == neighbor }?.toMutableList()
+                }.collect { l ->
+                    l?.sortBy { it.schoolName }
+                    this@SchoolDirectoryPage.schoolDirListAdapter.setData(l)
                 }
             }
         }
