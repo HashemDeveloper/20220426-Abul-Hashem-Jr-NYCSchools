@@ -9,6 +9,9 @@ import readAssetFile
 import javax.inject.Inject
 
 class LocalRepo @Inject constructor(): ILocalRepo {
+    /**
+     * Using flow to observe data from the UI layer
+     */
     override fun getSchoolDirsFromFile(context: Context): Flow<SchoolDirectoryList> = flow {
         val gson = Gson()
         val data = readAssetFile(context,"2020_DOE_High_School_Directory.json")
