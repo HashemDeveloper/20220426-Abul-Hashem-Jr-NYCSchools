@@ -45,7 +45,7 @@ class SchoolDirectoryPage : Fragment() {
         super.onViewCreated(view, savedInstanceState)
         schoolDirectoryPage_recyclerView_id.layoutManager = LinearLayoutManager(requireContext())
         schoolDirectoryPage_recyclerView_id.adapter = this.schoolDirListAdapter
-        getSchoolDirList()
+        getSchoolDirList(this.sharedViewModel.getFilterOption())
         setupPopUpFilter()
     }
     private fun setupPopUpFilter() {
@@ -76,13 +76,14 @@ class SchoolDirectoryPage : Fragment() {
                 }
             }
             print(item.title)
+            getSchoolDirList(item.title.toString())
             this.sharedViewModel.setFilterOption(item.title.toString())
             true
         }
     }
 
-    private fun getSchoolDirList() {
-        val neighbor: String = this.sharedViewModel.getFilterOption()
+    private fun getSchoolDirList(filterOption: String) {
+        val neighbor: String = filterOption
         viewLifecycleOwner.lifecycleScope.launch {
             viewLifecycleOwner.repeatOnLifecycle(Lifecycle.State.STARTED) {
                 sharedViewModel.schoolDirectories.map { m->

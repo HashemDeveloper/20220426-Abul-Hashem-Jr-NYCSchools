@@ -6,12 +6,10 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.activityViewModels
-import androidx.navigation.NavController
 import androidx.navigation.NavDirections
 import androidx.navigation.fragment.findNavController
 import com.chase.interview.project.R
 import com.chase.interview.project.di.ui.withFactory
-import com.chase.interview.project.models.IntentObj
 import com.chase.interview.project.viewmodel.SharedViewModel
 import dagger.android.support.AndroidSupportInjection
 import kotlinx.android.synthetic.main.fragment_welcome_page.*
