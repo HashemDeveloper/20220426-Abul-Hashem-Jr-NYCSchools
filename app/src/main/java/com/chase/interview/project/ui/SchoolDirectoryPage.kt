@@ -5,6 +5,9 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.AdapterView
+import android.widget.ArrayAdapter
+import androidx.appcompat.widget.ListPopupWindow
 import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.lifecycleScope
@@ -12,7 +15,6 @@ import androidx.lifecycle.repeatOnLifecycle
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.chase.interview.project.R
 import com.chase.interview.project.di.ui.withFactory
-import com.chase.interview.project.models.SchoolDirectoryObj
 import com.chase.interview.project.recylerviews.SchoolDirAdapter
 import com.chase.interview.project.viewmodel.SharedViewModel
 import com.chase.interview.project.ui.SchoolDirectoryPageArgs.fromBundle
@@ -50,6 +52,22 @@ class SchoolDirectoryPage : Fragment() {
         schoolDirectoryPage_recyclerView_id.layoutManager = LinearLayoutManager(requireContext())
         schoolDirectoryPage_recyclerView_id.adapter = this.schoolDirListAdapter
         getSchoolDirList()
+        setupPopUpFilter()
+
+    }
+    private fun setupPopUpFilter() {
+        val listPopupWindow = ListPopupWindow(requireContext(), null, androidx.appcompat.R.attr.listPopupWindowStyle)
+        listPopupWindow.anchorView = schoolDirectoryPage_filter_bt_id
+        listPopupWindow.width = 400
+        val items = listOf("BROOKLYN","QUEENS","MANHATTAN","STATEN ISLAND","BRONX")
+        val adapter = ArrayAdapter(requireContext(), R.layout.pop_up_filter_item_layout, R.id.pop_up_options_id, items)
+        listPopupWindow.setAdapter(adapter)
+        listPopupWindow.setOnItemClickListener { parent: AdapterView<*>?, view: View?, position: Int, id: Long ->
+            listPopupWindow.dismiss()
+        }
+        schoolDirectoryPage_filter_bt_id?.setOnClickListener {
+            listPopupWindow.show()
+        }
     }
 
     private fun getSchoolDirList() {
