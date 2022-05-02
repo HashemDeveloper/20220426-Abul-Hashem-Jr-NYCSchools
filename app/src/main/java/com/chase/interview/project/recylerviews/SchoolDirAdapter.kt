@@ -12,7 +12,7 @@ import com.chase.interview.project.models.SchoolDirectoryObj
 import com.google.android.material.button.MaterialButton
 import getFirstWord
 
-class SchoolDirAdapter: RecyclerView.Adapter<BaseViewHolder<*>>() {
+class SchoolDirAdapter constructor(val listener: SchoolDirItemActionListener): RecyclerView.Adapter<BaseViewHolder<*>>() {
     private val dataList: MutableList<SchoolDirectoryObj> = mutableListOf()
 
     fun setData(list: MutableList<SchoolDirectoryObj>?) {
@@ -24,7 +24,12 @@ class SchoolDirAdapter: RecyclerView.Adapter<BaseViewHolder<*>>() {
     }
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): BaseViewHolder<*> {
         val view: View = LayoutInflater.from(parent.context).inflate(R.layout.school_directory_list_item_view, parent, false)
-        return PreviewLinkViewHolder(view)
+        val holder = PreviewLinkViewHolder(view)
+        holder.learnMoreBt?.setOnClickListener {
+            val schoolDirectoryObj: SchoolDirectoryObj = holder.itemView.tag as SchoolDirectoryObj
+            this.listener.onLearnMoreClicked(schoolDirectoryObj)
+        }
+        return holder
     }
 
     override fun onBindViewHolder(holder: BaseViewHolder<*>, position: Int) {
@@ -40,7 +45,7 @@ class SchoolDirAdapter: RecyclerView.Adapter<BaseViewHolder<*>>() {
         private var phoneNumView: AppCompatTextView?= null
         private var faxNumView: AppCompatTextView?= null
         private var emailView: AppCompatTextView?= null
-        private var  learnMoreBt: MaterialButton?= null
+        var  learnMoreBt: MaterialButton?= null
         init {
             this.schoolNameView = this.view.findViewById(R.id.school_dir_item_school_name_view_id)
             this.addressView = this.view.findViewById(R.id.school_dir_item_address_view_id)
@@ -50,6 +55,7 @@ class SchoolDirAdapter: RecyclerView.Adapter<BaseViewHolder<*>>() {
             this.learnMoreBt = this.view.findViewById(R.id.school_dir_item_learnMore_bt_id)
         }
         override fun bindView(item: SchoolDirectoryObj) {
+            itemView.tag = item
             val address = "${item.primaryAddressLine1}, ${item.city}, ${item.stateCode}, ${item.postcode}"
             this.schoolNameView?.text = item.schoolName
             this.addressView?.text = address
@@ -69,5 +75,8 @@ class SchoolDirAdapter: RecyclerView.Adapter<BaseViewHolder<*>>() {
                 boldFirstWord(getFirstWord(email).length, email, it,true)
             }
         }
+    }
+    interface SchoolDirItemActionListener {
+        fun onLearnMoreClicked(schoolDirectoryObj: SchoolDirectoryObj)
     }
 }

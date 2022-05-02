@@ -1,9 +1,12 @@
 package com.chase.interview.project.models
 
+import android.os.Parcelable
 import com.google.gson.annotations.Expose
 import com.google.gson.annotations.SerializedName
+import kotlinx.android.parcel.Parcelize
+import kotlinx.android.parcel.RawValue
 
-
+@Parcelize
 data class SchoolDirectoryObj(
     @SerializedName("dbn")
     var dbn: String? = null,
@@ -225,7 +228,7 @@ data class SchoolDirectoryObj(
 
     @SerializedName("geocoded_column")
     @Expose
-    var geocodedColumn: GeocodedColumn? = null,
+    var geocodedColumn: @RawValue GeocodedColumn? = null,
 
     @SerializedName(":@computed_region_efsh_h5xi")
     @Expose(serialize = false)
@@ -246,5 +249,5 @@ data class SchoolDirectoryObj(
     @SerializedName(":@computed_region_sbqj_enih")
     @Expose(serialize = false)
     var computedRegionSbqjEnih: String? = null
-)
+):Parcelable
 

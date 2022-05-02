@@ -10,9 +10,12 @@ import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.repeatOnLifecycle
+import androidx.navigation.NavController
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.chase.interview.project.R
 import com.chase.interview.project.di.ui.withFactory
+import com.chase.interview.project.models.SchoolDirectoryObj
 import com.chase.interview.project.recylerviews.SchoolDirAdapter
 import com.chase.interview.project.viewmodel.SharedViewModel
 import dagger.android.support.AndroidSupportInjection
@@ -22,13 +25,13 @@ import kotlinx.coroutines.flow.map
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
-class SchoolDirectoryPage : Fragment() {
+class SchoolDirectoryPage : Fragment(), SchoolDirAdapter.SchoolDirItemActionListener {
     @Inject
     lateinit var viewModelFactory: SharedViewModel.Factory
     private val sharedViewModel: SharedViewModel by activityViewModels {
         withFactory(this.viewModelFactory)
     }
-    private val schoolDirListAdapter: SchoolDirAdapter = SchoolDirAdapter()
+    private val schoolDirListAdapter: SchoolDirAdapter = SchoolDirAdapter(this)
     override fun onCreate(savedInstanceState: Bundle?) {
         AndroidSupportInjection.inject(this)
         super.onCreate(savedInstanceState)
@@ -104,5 +107,11 @@ class SchoolDirectoryPage : Fragment() {
             filterOptionMap["STATEN ISLAND"] = 3
             filterOptionMap["BRONX"] = 4
         }
+    }
+
+    override fun onLearnMoreClicked(schoolDirectoryObj: SchoolDirectoryObj) {
+        val router: SchoolDirectoryPageDirections.ActionSchoolDirectoryPageToSchoolDirectoryDetailsPage = SchoolDirectoryPageDirections.actionSchoolDirectoryPageToSchoolDirectoryDetailsPage(schoolDirectoryObj)
+        val controller: NavController = findNavController()
+        controller.navigate(router)
     }
 }
