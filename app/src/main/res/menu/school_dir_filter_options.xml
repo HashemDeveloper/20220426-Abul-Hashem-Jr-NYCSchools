@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+    <group android:checkableBehavior="single">
+    <item
+        android:id="@+id/filter_brooklyn"
+        android:title="@string/br_brooklyn"
+        app:showAsAction="never"
+        />
+    <item
+        android:id="@+id/filter_queens"
+        android:title="@string/br_queens"
+        app:showAsAction="never"
+        />
+    <item
+        android:id="@+id/filter_manhattan"
+        android:title="@string/br_manhattan"
+        app:showAsAction="never"
+        />
+    <item
+        android:id="@+id/filter_si"
+        android:title="@string/br_staten_island"
+        app:showAsAction="never"
+        />
+    <item
+        android:id="@+id/filter_bronx"
+        android:title="@string/br_bronx"
+        app:showAsAction="never"
+        />
+    </group>
+</menu>

@@ -8,23 +8,25 @@
         android:id="@+id/welcomePage"
         android:name="com.chase.interview.project.ui.WelcomePage"
         android:label="fragment_welcome_page"
-        tools:layout="@layout/fragment_welcome_page" >
+        tools:layout="@layout/fragment_welcome_page"
+        >
         <action
             android:id="@+id/action_welcomePage_to_schoolDirectoryPage"
             app:destination="@id/schoolDirectoryPage"
             app:enterAnim="@android:anim/fade_in"
             app:exitAnim="@android:anim/fade_out"
             app:popEnterAnim="@anim/nav_default_pop_enter_anim"
-            app:popExitAnim="@anim/nav_default_pop_exit_anim" />
+            app:popExitAnim="@anim/nav_default_pop_exit_anim"
+            app:launchSingleTop="true"
+            app:popUpTo="@+id/welcomePage"
+            app:popUpToInclusive="true"
+            >
+        </action>
     </fragment>
     <fragment
         android:id="@+id/schoolDirectoryPage"
         android:name="com.chase.interview.project.ui.SchoolDirectoryPage"
         android:label="fragment_school_directory_page"
         tools:layout="@layout/fragment_school_directory_page">
-        <argument
-            android:name="WelcomePage"
-            app:argType="com.chase.interview.project.models.IntentObj"
-            />
     </fragment>
 </navigation>

@@ -5,9 +5,7 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.AdapterView
-import android.widget.ArrayAdapter
-import androidx.appcompat.widget.ListPopupWindow
+import androidx.appcompat.widget.PopupMenu
 import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.lifecycleScope
@@ -17,7 +15,6 @@ import com.chase.interview.project.R
 import com.chase.interview.project.di.ui.withFactory
 import com.chase.interview.project.recylerviews.SchoolDirAdapter
 import com.chase.interview.project.viewmodel.SharedViewModel
-import com.chase.interview.project.ui.SchoolDirectoryPageArgs.fromBundle
 import dagger.android.support.AndroidSupportInjection
 import kotlinx.android.synthetic.main.fragment_school_directory_page.*
 import kotlinx.coroutines.flow.collect
@@ -32,9 +29,6 @@ class SchoolDirectoryPage : Fragment() {
         withFactory(this.viewModelFactory)
     }
     private val schoolDirListAdapter: SchoolDirAdapter = SchoolDirAdapter()
-    private val intentObj by lazy {
-        fromBundle(requireArguments()).welcomePage
-    }
     override fun onCreate(savedInstanceState: Bundle?) {
         AndroidSupportInjection.inject(this)
         super.onCreate(savedInstanceState)
@@ -53,25 +47,42 @@ class SchoolDirectoryPage : Fragment() {
         schoolDirectoryPage_recyclerView_id.adapter = this.schoolDirListAdapter
         getSchoolDirList()
         setupPopUpFilter()
-
     }
     private fun setupPopUpFilter() {
-        val listPopupWindow = ListPopupWindow(requireContext(), null, androidx.appcompat.R.attr.listPopupWindowStyle)
-        listPopupWindow.anchorView = schoolDirectoryPage_filter_bt_id
-        listPopupWindow.width = 400
-        val items = listOf("BROOKLYN","QUEENS","MANHATTAN","STATEN ISLAND","BRONX")
-        val adapter = ArrayAdapter(requireContext(), R.layout.pop_up_filter_item_layout, R.id.pop_up_options_id, items)
-        listPopupWindow.setAdapter(adapter)
-        listPopupWindow.setOnItemClickListener { parent: AdapterView<*>?, view: View?, position: Int, id: Long ->
-            listPopupWindow.dismiss()
-        }
+        val popupWindow = PopupMenu(requireContext(),schoolDirectoryPage_filter_bt_id)
+        popupWindow.menuInflater.inflate(R.menu.school_dir_filter_options,popupWindow.menu)
+        val filterOption: String = this.sharedViewModel.getFilterOption()
+        popupWindow.menu.getItem(filterOptionMap[filterOption]!!).isChecked = true
         schoolDirectoryPage_filter_bt_id?.setOnClickListener {
-            listPopupWindow.show()
+            popupWindow.show()
+        }
+        popupWindow.setOnMenuItemClickListener { item ->
+            when (item.itemId) {
+                R.id.filter_brooklyn -> {
+                    print(item.title)
+                    item.isChecked = true
+                }
+                R.id.filter_queens -> {
+                    item.isChecked = true
+                }
+                R.id.filter_manhattan -> {
+                    item.isChecked = true
+                }
+                R.id.filter_si -> {
+                    item.isChecked = true
+                }
+                R.id.filter_bronx -> {
+                    item.isChecked = true
+                }
+            }
+            print(item.title)
+            this.sharedViewModel.setFilterOption(item.title.toString())
+            true
         }
     }
 
     private fun getSchoolDirList() {
-        val neighbor: String = intentObj.data
+        val neighbor: String = this.sharedViewModel.getFilterOption()
         viewLifecycleOwner.lifecycleScope.launch {
             viewLifecycleOwner.repeatOnLifecycle(Lifecycle.State.STARTED) {
                 sharedViewModel.schoolDirectories.map { m->
@@ -81,6 +92,16 @@ class SchoolDirectoryPage : Fragment() {
                     this@SchoolDirectoryPage.schoolDirListAdapter.setData(l)
                 }
             }
+        }
+    }
+    companion object {
+        private val filterOptionMap: MutableMap<String,Int> = mutableMapOf()
+        init {
+            filterOptionMap["BROOKLYN"] = 0
+            filterOptionMap["FLUSHING"] = 1
+            filterOptionMap["MANHATTAN"] = 2
+            filterOptionMap["STATEN ISLAND"] = 3
+            filterOptionMap["BRONX"] = 4
         }
     }
 }

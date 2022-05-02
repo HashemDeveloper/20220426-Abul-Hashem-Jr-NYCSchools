@@ -19,6 +19,16 @@ class SharedPrefService @Inject constructor(): ISharedPrefService {
         }
     }
 
+    override fun getFilterOption(): String {
+        return pref?.getString(Common.FILTER_OPTION,"")!!
+    }
+
+    override fun setFilterOption(title: String) {
+        pref?.edit(commit = true) {
+            putString(Common.FILTER_OPTION,title)
+        }
+    }
+
     companion object {
         private var pref: SharedPreferences?= null
         @Volatile

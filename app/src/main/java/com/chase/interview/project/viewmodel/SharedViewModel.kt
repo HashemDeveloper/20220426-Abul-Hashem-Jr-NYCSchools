@@ -43,6 +43,15 @@ class SharedViewModel(private val savedStateHandle: SavedStateHandle,
         }
         return !isFirstTime
     }
+
+    fun getFilterOption(): String {
+        return this.iSharedPrefService.getFilterOption()
+    }
+
+    fun setFilterOption(title: String) {
+        this.iSharedPrefService.setFilterOption(title)
+    }
+
     class Factory @Inject constructor(
         val iSharedPrefService: ISharedPrefService,
         val iLocalRepo: ILocalRepo

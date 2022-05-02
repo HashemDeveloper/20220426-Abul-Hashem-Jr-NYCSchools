@@ -30,13 +30,12 @@ class NYCSchoolsMain : BaseActivity(), HasAndroidInjector {
     }
 
     override fun getDestination(): Int {
-//        val isFirstTimeLaunch: Boolean = this.sharedViewModel.isLaunchedFirstTime()
-//        return if (isFirstTimeLaunch) {
-//            R.id.welcomePage
-//        } else {
-//            R.id.schoolDirectoryPage
-//        }
-        return R.id.welcomePage
+        val isFirstTimeLaunch: Boolean = this.sharedViewModel.isLaunchedFirstTime()
+        return if (isFirstTimeLaunch) {
+            R.id.welcomePage
+        } else {
+            R.id.schoolDirectoryPage
+        }
     }
 
     override fun loadDatFromFile() {

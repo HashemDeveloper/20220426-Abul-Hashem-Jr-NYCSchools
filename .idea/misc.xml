@@ -6,12 +6,15 @@
         <entry key="app/src/main/res/drawable/dr_dashed_line.xml" value="0.226" />
         <entry key="app/src/main/res/drawable/dr_nyc_splash_screen.xml" value="0.243" />
         <entry key="app/src/main/res/drawable/dr_nyc_splash_screen_night.xml" value="0.1135" />
+        <entry key="app/src/main/res/drawable/ic_place_grey_24.xml" value="0.2395" />
+        <entry key="app/src/main/res/drawable/option_selector.xml" value="0.2395" />
         <entry key="app/src/main/res/layout/activity_main.xml" value="0.18333333333333332" />
         <entry key="app/src/main/res/layout/fragment_school_directory_page.xml" value="0.24193115234375" />
         <entry key="app/src/main/res/layout/fragment_welcome_page.xml" value="0.25128480957378524" />
         <entry key="app/src/main/res/layout/pop_up_filter_item_layout.xml" value="0.22552083333333334" />
         <entry key="app/src/main/res/layout/school_directory_list_item_view.xml" value="0.55372314453125" />
         <entry key="app/src/main/res/layout/school_directory_list_view.xml" value="0.1529888551165147" />
+        <entry key="app/src/main/res/menu/school_dir_filter_options.xml" value="0.2421875" />
       </map>
     </option>
   </component>
