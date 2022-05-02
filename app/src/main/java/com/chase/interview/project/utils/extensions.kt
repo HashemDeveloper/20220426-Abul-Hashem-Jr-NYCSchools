@@ -1,8 +1,9 @@
 import android.content.Context
 import android.graphics.Typeface
-import android.text.Spannable
-import android.text.SpannableStringBuilder
+import android.os.Build
+import android.text.*
 import android.text.style.StyleSpan
+import android.text.style.UnderlineSpan
 import androidx.appcompat.widget.AppCompatTextView
 import java.io.IOException
 import java.io.InputStream
@@ -29,7 +30,7 @@ fun getFirstWord(input: String): String {
     }
     return input
 }
-fun boldFirstWord(end: Int, sentence: String, textView: AppCompatTextView) {
+fun boldFirstWord(end: Int, sentence: String, textView: AppCompatTextView, isUnderLine: Boolean) {
     if (sentence.isNotEmpty()) {
         val fancySentence = SpannableStringBuilder(sentence)
         fancySentence.setSpan(
@@ -38,6 +39,14 @@ fun boldFirstWord(end: Int, sentence: String, textView: AppCompatTextView) {
             end,
             Spannable.SPAN_EXCLUSIVE_EXCLUSIVE
         )
+        if (isUnderLine) {
+            fancySentence.setSpan(UnderlineSpan(), end+1, sentence.length, Spannable.SPAN_EXCLUSIVE_EXCLUSIVE)
+        }
         textView.text = fancySentence
     }
+}
+fun underLineText(start: Int, text: String): String {
+    val content = SpannableString(text)
+    content.setSpan(UnderlineSpan(), start, text.length, 0)
+    return content.toString()
 }

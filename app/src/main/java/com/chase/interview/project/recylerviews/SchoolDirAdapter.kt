@@ -1,5 +1,7 @@
 package com.chase.interview.project.recylerviews
 
+import android.text.SpannableString
+import android.text.style.UnderlineSpan
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -57,13 +59,13 @@ class SchoolDirAdapter: RecyclerView.Adapter<BaseViewHolder<*>>() {
             val faxNumber = "${view.context.resources.getString(R.string.fax)}: ${item.faxNumber}"
             val email = "${view.context.resources.getString(R.string.email)}: ${item.schoolEmail}"
             this.phoneNumView?.let {
-                boldFirstWord(getFirstWord(phoneNumber).length, phoneNumber, it)
+                boldFirstWord(getFirstWord(phoneNumber).length, phoneNumber, it,true)
             }
             this.faxNumView?.let {
-                boldFirstWord(getFirstWord(faxNumber).length, faxNumber, it)
+                boldFirstWord(getFirstWord(faxNumber).length, faxNumber, it,true)
             }
             this.emailView?.let {
-                boldFirstWord(getFirstWord(email).length, email, it)
+                boldFirstWord(getFirstWord(email).length, email, it,true)
             }
         }
     }

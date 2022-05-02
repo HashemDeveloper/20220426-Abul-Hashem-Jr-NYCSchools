@@ -10,7 +10,7 @@
         android:layout_width="0dp"
         android:layout_height="match_parent"
         app:cardCornerRadius="8dp"
-        app:cardElevation="16dp"
+        app:cardElevation="4dp"
         app:contentPadding="16dp"
         app:layout_constraintBottom_toTopOf="@+id/bottomGdLine"
         app:layout_constraintEnd_toStartOf="@+id/rightGuideLine"
@@ -65,6 +65,7 @@
                 android:gravity="center"
                 android:layout_marginTop="8dp"
                 android:text="@string/phone_number"
+                android:textSize="16sp"
                 app:layout_constraintStart_toStartOf="@+id/school_dir_item_fax_view_id"
                 app:layout_constraintTop_toBottomOf="@+id/school_dir_dashed_view_id" />
 
@@ -72,7 +73,9 @@
                 android:id="@+id/school_dir_item_fax_view_id"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
                 android:text="@string/fax"
+                android:textSize="16sp"
                 app:layout_constraintStart_toStartOf="@+id/school_dir_item_email_view_id"
                 app:layout_constraintTop_toBottomOf="@+id/school_dir_item_phoneNum_view_id" />
 
@@ -80,7 +83,9 @@
                 android:id="@+id/school_dir_item_email_view_id"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
                 android:text="@string/email"
+                android:textSize="16sp"
                 app:layout_constraintEnd_toEndOf="@+id/school_dir_item_fax_view_id"
                 app:layout_constraintTop_toBottomOf="@+id/school_dir_item_fax_view_id" />
 
