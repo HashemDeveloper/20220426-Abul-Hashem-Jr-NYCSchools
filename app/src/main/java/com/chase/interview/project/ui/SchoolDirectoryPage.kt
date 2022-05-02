@@ -47,9 +47,13 @@ class SchoolDirectoryPage : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        val neighbor: String = intentObj.data
         schoolDirectoryPage_recyclerView_id.layoutManager = LinearLayoutManager(requireContext())
         schoolDirectoryPage_recyclerView_id.adapter = this.schoolDirListAdapter
+        getSchoolDirList()
+    }
+
+    private fun getSchoolDirList() {
+        val neighbor: String = intentObj.data
         viewLifecycleOwner.lifecycleScope.launch {
             viewLifecycleOwner.repeatOnLifecycle(Lifecycle.State.STARTED) {
                 sharedViewModel.schoolDirectories.map { m->
