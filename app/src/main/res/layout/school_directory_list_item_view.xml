@@ -65,6 +65,7 @@
                 android:gravity="center"
                 android:layout_marginTop="8dp"
                 android:text="@string/phone_number"
+                android:fontFamily="@font/lato"
                 android:textSize="16sp"
                 app:layout_constraintStart_toStartOf="@+id/school_dir_item_fax_view_id"
                 app:layout_constraintTop_toBottomOf="@+id/school_dir_dashed_view_id" />
@@ -74,6 +75,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="8dp"
+                android:fontFamily="@font/lato"
                 android:text="@string/fax"
                 android:textSize="16sp"
                 app:layout_constraintStart_toStartOf="@+id/school_dir_item_email_view_id"
@@ -85,6 +87,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="8dp"
                 android:text="@string/email"
+                android:fontFamily="@font/lato"
                 android:textSize="16sp"
                 app:layout_constraintEnd_toEndOf="@+id/school_dir_item_fax_view_id"
                 app:layout_constraintTop_toBottomOf="@+id/school_dir_item_fax_view_id" />
@@ -98,6 +101,8 @@
                 app:backgroundTint="@color/gray_100"
                 android:layout_marginTop="8dp"
                 app:cornerRadius="4dp"
+                app:elevation="4dp"
+                android:fontFamily="@font/lato"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"

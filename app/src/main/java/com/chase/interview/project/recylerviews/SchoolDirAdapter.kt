@@ -9,6 +9,7 @@ import boldFirstWord
 import com.chase.interview.project.R
 import com.chase.interview.project.base.BaseViewHolder
 import com.chase.interview.project.models.SchoolDirectoryObj
+import com.google.android.material.button.MaterialButton
 import getFirstWord
 
 class SchoolDirAdapter: RecyclerView.Adapter<BaseViewHolder<*>>() {
@@ -39,12 +40,14 @@ class SchoolDirAdapter: RecyclerView.Adapter<BaseViewHolder<*>>() {
         private var phoneNumView: AppCompatTextView?= null
         private var faxNumView: AppCompatTextView?= null
         private var emailView: AppCompatTextView?= null
+        private var  learnMoreBt: MaterialButton?= null
         init {
             this.schoolNameView = this.view.findViewById(R.id.school_dir_item_school_name_view_id)
             this.addressView = this.view.findViewById(R.id.school_dir_item_address_view_id)
             this.phoneNumView = this.view.findViewById(R.id.school_dir_item_phoneNum_view_id)
             this.faxNumView = this.view.findViewById(R.id.school_dir_item_fax_view_id)
             this.emailView = this.view.findViewById(R.id.school_dir_item_email_view_id)
+            this.learnMoreBt = this.view.findViewById(R.id.school_dir_item_learnMore_bt_id)
         }
         override fun bindView(item: SchoolDirectoryObj) {
             val address = "${item.primaryAddressLine1}, ${item.city}, ${item.stateCode}, ${item.postcode}"
