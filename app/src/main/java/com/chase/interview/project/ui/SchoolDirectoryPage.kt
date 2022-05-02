@@ -9,12 +9,15 @@ import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.repeatOnLifecycle
+import androidx.recyclerview.widget.LinearLayoutManager
 import com.chase.interview.project.R
 import com.chase.interview.project.di.ui.withFactory
 import com.chase.interview.project.models.SchoolDirectoryObj
+import com.chase.interview.project.recylerviews.SchoolDirAdapter
 import com.chase.interview.project.viewmodel.SharedViewModel
 import com.chase.interview.project.ui.SchoolDirectoryPageArgs.fromBundle
 import dagger.android.support.AndroidSupportInjection
+import kotlinx.android.synthetic.main.fragment_school_directory_page.*
 import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.launch
 import javax.inject.Inject
@@ -25,6 +28,7 @@ class SchoolDirectoryPage : Fragment() {
     private val sharedViewModel: SharedViewModel by activityViewModels {
         withFactory(this.viewModelFactory)
     }
+    private val schoolDirListAdapter: SchoolDirAdapter = SchoolDirAdapter()
     private val intentObj by lazy {
         fromBundle(requireArguments()).welcomePage
     }
@@ -43,12 +47,14 @@ class SchoolDirectoryPage : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         val neighbor: String = intentObj.data
+        schoolDirectoryPage_recyclerView_id.layoutManager = LinearLayoutManager(requireContext())
+        schoolDirectoryPage_recyclerView_id.adapter = this.schoolDirListAdapter
         viewLifecycleOwner.lifecycleScope.launch {
             viewLifecycleOwner.repeatOnLifecycle(Lifecycle.State.STARTED) {
                 sharedViewModel.schoolDirectories.collect {
                     val schoolDirList: MutableList<SchoolDirectoryObj>? = it?.results?.filter { v -> v.city == neighbor }?.toMutableList()
                     schoolDirList?.sortBy { it.schoolName }
-                    print(schoolDirList)
+                    this@SchoolDirectoryPage.schoolDirListAdapter.setData(schoolDirList)
                 }
             }
         }

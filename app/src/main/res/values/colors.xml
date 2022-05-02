@@ -9,4 +9,6 @@
     <color name="white">#FFFFFFFF</color>
     <color name="gray_100">#F5F5F5</color>
     <color name="filter_color">@color/black</color>
+    <color name="dashed_line">@color/dark_grey</color>
+    <color name="dark_grey">#888888</color>
 </resources>

@@ -8,4 +8,9 @@
     <string name="br_manhattan">MANHATTAN</string>
     <string name="br_staten_island">STATEN ISLAND</string>
     <string name="br_bronx">BRONX</string>
+    <string name="school_name">School Name</string>
+    <string name="address">Address</string>
+    <string name="phone_number">Phone</string>
+    <string name="fax">Fax</string>
+    <string name="email">Email</string>
 </resources>

@@ -1,0 +1,117 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:padding="4dp"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
+    <com.google.android.material.card.MaterialCardView
+        android:layout_width="0dp"
+        android:layout_height="match_parent"
+        app:cardCornerRadius="8dp"
+        app:cardElevation="16dp"
+        app:contentPadding="16dp"
+        app:layout_constraintBottom_toTopOf="@+id/bottomGdLine"
+        app:layout_constraintEnd_toStartOf="@+id/rightGuideLine"
+        app:layout_constraintStart_toStartOf="@+id/leftGuideLine"
+        app:layout_constraintTop_toTopOf="@+id/topGuideLine"
+        app:rippleColor="@color/gray_100">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/school_dir_item_school_name_view_id"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/lato_black"
+                android:text="@string/school_name"
+                android:textAlignment="textStart"
+                android:textSize="24sp"
+                app:layout_constraintBottom_toTopOf="@+id/school_dir_item_address_view_id"
+                app:layout_constraintStart_toStartOf="@+id/school_dir_item_address_view_id"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintVertical_bias="0.32" />
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/school_dir_item_address_view_id"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:fontFamily="@font/lato"
+                android:text="@string/address"
+                android:textAlignment="textStart"
+                android:textSize="18sp"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/school_dir_item_school_name_view_id" />
+
+            <androidx.appcompat.widget.AppCompatImageView
+                android:id="@+id/school_dir_dashed_view_id"
+                android:layout_width="0dp"
+                android:layout_height="5dp"
+                android:layout_marginTop="8dp"
+                app:srcCompat="@drawable/dr_dashed_line"
+                android:layerType="software"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/school_dir_item_address_view_id" />
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/school_dir_item_phoneNum_view_id"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:layout_marginTop="8dp"
+                android:text="@string/phone_number"
+                app:layout_constraintStart_toStartOf="@+id/school_dir_item_fax_view_id"
+                app:layout_constraintTop_toBottomOf="@+id/school_dir_dashed_view_id" />
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/school_dir_item_fax_view_id"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/fax"
+                app:layout_constraintStart_toStartOf="@+id/school_dir_item_email_view_id"
+                app:layout_constraintTop_toBottomOf="@+id/school_dir_item_phoneNum_view_id" />
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/school_dir_item_email_view_id"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/email"
+                app:layout_constraintEnd_toEndOf="@+id/school_dir_item_fax_view_id"
+                app:layout_constraintTop_toBottomOf="@+id/school_dir_item_fax_view_id" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </com.google.android.material.card.MaterialCardView>
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/topGuideLine"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_percent="0.04" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/leftGuideLine"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintGuide_percent="0.02" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/rightGuideLine"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintGuide_percent="0.98" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/bottomGdLine"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_percent="0.96" />
+</androidx.constraintlayout.widget.ConstraintLayout>
