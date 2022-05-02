@@ -11,5 +11,6 @@
     <string name="fax">Fax</string>
     <string name="email">Email</string>
     <string name="phone_number">Phone</string>
+    <string name="learn_more">Learn More</string>
 
 </resources>

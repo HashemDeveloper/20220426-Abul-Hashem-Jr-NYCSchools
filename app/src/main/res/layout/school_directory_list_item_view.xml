@@ -89,6 +89,21 @@
                 app:layout_constraintEnd_toEndOf="@+id/school_dir_item_fax_view_id"
                 app:layout_constraintTop_toBottomOf="@+id/school_dir_item_fax_view_id" />
 
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/school_dir_item_learnMore_bt_id"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:text="@string/learn_more"
+                android:textColor="@color/dark_grey"
+                app:backgroundTint="@color/gray_100"
+                android:layout_marginTop="8dp"
+                app:cornerRadius="4dp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/school_dir_item_email_view_id"
+                app:rippleColor="@color/dark_grey" />
+
         </androidx.constraintlayout.widget.ConstraintLayout>
     </com.google.android.material.card.MaterialCardView>
 
