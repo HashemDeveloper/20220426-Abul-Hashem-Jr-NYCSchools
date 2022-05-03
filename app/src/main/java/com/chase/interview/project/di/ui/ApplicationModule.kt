@@ -6,6 +6,8 @@ import com.chase.interview.project.data.local.ILocalRepo
 import com.chase.interview.project.data.local.ISharedPrefService
 import com.chase.interview.project.data.local.LocalRepo
 import com.chase.interview.project.data.local.SharedPrefService
+import com.chase.interview.project.data.remote.INYCSchoolRepo
+import com.chase.interview.project.data.remote.NYCSchoolRepo
 import dagger.Module
 import dagger.Provides
 import javax.inject.Singleton
@@ -26,5 +28,10 @@ class ApplicationModule {
     @Provides
     fun provideLocalRepo(localRepo: LocalRepo): ILocalRepo {
         return localRepo
+    }
+    @Singleton
+    @Provides
+    fun provideNYCSchoolRepo(repo: NYCSchoolRepo): INYCSchoolRepo {
+        return repo
     }
 }

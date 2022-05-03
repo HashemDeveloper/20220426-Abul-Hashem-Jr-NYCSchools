@@ -110,6 +110,7 @@ class SchoolDirectoryPage : Fragment(), SchoolDirAdapter.SchoolDirItemActionList
     }
 
     override fun onLearnMoreClicked(schoolDirectoryObj: SchoolDirectoryObj) {
+        schoolDirectoryObj.dbn?.let { this.sharedViewModel.fetchSATScores(it) }
         val router: SchoolDirectoryPageDirections.ActionSchoolDirectoryPageToSchoolDirectoryDetailsPage = SchoolDirectoryPageDirections.actionSchoolDirectoryPageToSchoolDirectoryDetailsPage(schoolDirectoryObj)
         val controller: NavController = findNavController()
         controller.navigate(router)

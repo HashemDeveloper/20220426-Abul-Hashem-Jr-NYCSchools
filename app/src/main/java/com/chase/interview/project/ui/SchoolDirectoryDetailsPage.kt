@@ -5,12 +5,31 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.fragment.app.activityViewModels
+import androidx.lifecycle.Lifecycle
+import androidx.lifecycle.lifecycleScope
+import androidx.lifecycle.repeatOnLifecycle
+import boldFirstWord
 import com.chase.interview.project.R
+import com.chase.interview.project.di.ui.withFactory
+import com.chase.interview.project.models.SatScoreDataObj
 import com.chase.interview.project.models.SchoolDirectoryObj
 import com.chase.interview.project.ui.SchoolDirectoryDetailsPageArgs.fromBundle
+import com.chase.interview.project.utils.RequestState
+import com.chase.interview.project.viewmodel.SharedViewModel
 import dagger.android.support.AndroidSupportInjection
+import getFirstWord
+import kotlinx.android.synthetic.main.fragment_school_directory_details_page.*
+import kotlinx.coroutines.flow.collect
+import kotlinx.coroutines.launch
+import javax.inject.Inject
 
 class SchoolDirectoryDetailsPage : Fragment() {
+    @Inject
+    lateinit var viewModelFactory: SharedViewModel.Factory
+    private val sharedViewModel: SharedViewModel by activityViewModels {
+        withFactory(this.viewModelFactory)
+    }
     private val schoolDirectoryObj: SchoolDirectoryObj by lazy {
         fromBundle(requireArguments()).schoolDirectoryPage
     }
@@ -28,6 +47,34 @@ class SchoolDirectoryDetailsPage : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        print(schoolDirectoryObj.dbn)
+        setupInitialData()
+        fetchSATScores()
+    }
+    private fun fetchSATScores() {
+        viewLifecycleOwner.lifecycleScope.launch {
+            viewLifecycleOwner.repeatOnLifecycle(Lifecycle.State.STARTED) {
+                sharedViewModel.satScoreResult.collect { state ->
+                    when (state) {
+                        is RequestState.Loading -> {
+                            print("LOADING")
+                        }
+                        is RequestState.Success -> {
+                            val data: List<SatScoreDataObj> = state.data
+                            print(data)
+                        }
+                        is RequestState.Error -> {
+                            print(state.error)
+                        }
+                        else -> {}
+                    }
+                }
+            }
+        }
+    }
+    private fun setupInitialData() {
+        fragment_school_dir_details_titleview_id?.let {
+            boldFirstWord(getFirstWord(schoolDirectoryObj.schoolName!!).length,schoolDirectoryObj.schoolName!!, it, false)
+        }
+        fragment_school_dir_overview_id.text = schoolDirectoryObj.overviewParagraph
     }
 }
