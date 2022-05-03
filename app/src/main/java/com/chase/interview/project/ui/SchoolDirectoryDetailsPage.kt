@@ -9,11 +9,13 @@ import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.repeatOnLifecycle
+import androidx.recyclerview.widget.LinearLayoutManager
 import boldFirstWord
 import com.chase.interview.project.R
 import com.chase.interview.project.di.ui.withFactory
 import com.chase.interview.project.models.SatScoreDataObj
 import com.chase.interview.project.models.SchoolDirectoryObj
+import com.chase.interview.project.recylerviews.SchoolDetailsAdapter
 import com.chase.interview.project.ui.SchoolDirectoryDetailsPageArgs.fromBundle
 import com.chase.interview.project.utils.RequestState
 import com.chase.interview.project.viewmodel.SharedViewModel
@@ -30,6 +32,7 @@ class SchoolDirectoryDetailsPage : Fragment() {
     private val sharedViewModel: SharedViewModel by activityViewModels {
         withFactory(this.viewModelFactory)
     }
+    private val schoolDetailsAdapter: SchoolDetailsAdapter = SchoolDetailsAdapter()
     private val schoolDirectoryObj: SchoolDirectoryObj by lazy {
         fromBundle(requireArguments()).schoolDirectoryPage
     }
@@ -47,20 +50,25 @@ class SchoolDirectoryDetailsPage : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        setupInitialData()
+        fragment_school_details_recyclerView_id?.layoutManager = LinearLayoutManager(requireContext())
+        fragment_school_details_recyclerView_id?.adapter = this.schoolDetailsAdapter
+        DETAILS_LIST.add(schoolDirectoryObj)
+        this.schoolDetailsAdapter.setData(DETAILS_LIST)
         fetchSATScores()
     }
     private fun fetchSATScores() {
         viewLifecycleOwner.lifecycleScope.launch {
-            viewLifecycleOwner.repeatOnLifecycle(Lifecycle.State.STARTED) {
+            viewLifecycleOwner.repeatOnLifecycle(Lifecycle.State.CREATED) {
                 sharedViewModel.satScoreResult.collect { state ->
                     when (state) {
                         is RequestState.Loading -> {
-                            print("LOADING")
+                            this@SchoolDirectoryDetailsPage.schoolDetailsAdapter.setIsLoading(true)
                         }
                         is RequestState.Success -> {
-                            val data: List<SatScoreDataObj> = state.data
-                            print(data)
+                            val satScoreDataObj = state.data[0]
+                            DETAILS_LIST.add(satScoreDataObj)
+                            this@SchoolDirectoryDetailsPage.schoolDetailsAdapter.setData(
+                                DETAILS_LIST)
                         }
                         is RequestState.Error -> {
                             print(state.error)
@@ -71,10 +79,17 @@ class SchoolDirectoryDetailsPage : Fragment() {
             }
         }
     }
-    private fun setupInitialData() {
-        fragment_school_dir_details_titleview_id?.let {
-            boldFirstWord(getFirstWord(schoolDirectoryObj.schoolName!!).length,schoolDirectoryObj.schoolName!!, it, false)
-        }
-        fragment_school_dir_overview_id.text = schoolDirectoryObj.overviewParagraph
+    override fun onDestroy() {
+        super.onDestroy()
+        DETAILS_LIST.clear()
+    }
+//    private fun setupInitialData() {
+//        fragment_school_dir_details_titleview_id?.let {
+//            boldFirstWord(getFirstWord(schoolDirectoryObj.schoolName!!).length,schoolDirectoryObj.schoolName!!, it, false)
+//        }
+//        fragment_school_dir_overview_id.text = schoolDirectoryObj.overviewParagraph
+//    }
+    companion object {
+        private val DETAILS_LIST: MutableList<Any> = mutableListOf()
     }
 }
