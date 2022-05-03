@@ -83,12 +83,6 @@ class SchoolDirectoryDetailsPage : Fragment() {
         super.onDestroy()
         DETAILS_LIST.clear()
     }
-//    private fun setupInitialData() {
-//        fragment_school_dir_details_titleview_id?.let {
-//            boldFirstWord(getFirstWord(schoolDirectoryObj.schoolName!!).length,schoolDirectoryObj.schoolName!!, it, false)
-//        }
-//        fragment_school_dir_overview_id.text = schoolDirectoryObj.overviewParagraph
-//    }
     companion object {
         private val DETAILS_LIST: MutableList<Any> = mutableListOf()
     }

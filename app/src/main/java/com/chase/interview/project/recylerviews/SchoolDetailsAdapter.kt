@@ -61,12 +61,12 @@ class SchoolDetailsAdapter: RecyclerView.Adapter<BaseViewHolder<*>>() {
         private var schoolNameView: AppCompatTextView?= null
         private var overviewView: AppCompatTextView?= null
         init {
-            this.schoolNameView = this.view.findViewById(R.id.school_details_page_sat_titleView_id)
+            this.schoolNameView = this.view.findViewById(R.id.fragment_school_dir_details_titleview_id)
            this.overviewView = this.view.findViewById(R.id.fragment_school_dir_overview_id)
         }
         override fun bindView(item: SchoolDirectoryObj) {
             this.schoolNameView?.let {
-                boldFirstWord(getFirstWord(item.schoolName!!).length,item.schoolName!!, it, false)
+                boldFirstWord(getFirstWord(item.schoolName!!).length, item.schoolName!!, it, false)
             }
             overviewView?.text = item.overviewParagraph
         }
