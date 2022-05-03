@@ -35,11 +35,11 @@ class SchoolDirAdapter constructor(val listener: SchoolDirItemActionListener): R
     }
 
     override fun onBindViewHolder(holder: BaseViewHolder<*>, position: Int) {
-        (holder as PreviewLinkViewHolder).bindView(this.dataList[position])
+        (holder as PreviewLinkViewHolder).bindView(this.filteredData[position])
     }
 
     override fun getItemCount(): Int {
-        return this.dataList.size
+        return this.filteredData.size
     }
     inner class PreviewLinkViewHolder(private val view: View): BaseViewHolder<SchoolDirectoryObj>(view) {
         private var schoolNameView: AppCompatTextView?= null
@@ -88,11 +88,13 @@ class SchoolDirAdapter constructor(val listener: SchoolDirItemActionListener): R
                 val resultList: MutableList<SchoolDirectoryObj> = mutableListOf()
                 filteredData = if (!(constraints == null || constraints.isEmpty())) {
                     val queries: String = constraints.toString()
-                    for (schoolDirObj in dataList) {
-                        if (schoolDirObj.schoolName?.lowercase()?.contains(queries.lowercase())!! ||
-                                schoolDirObj.ellPrograms?.lowercase()?.contains(queries.lowercase())!! ||
-                                schoolDirObj.diplomaendorsements?.lowercase()?.contains(queries.lowercase())!!) {
-                            resultList.add(schoolDirObj)
+                    if (queries.length >= 3) {
+                        for (schoolDirObj in dataList) {
+                            if (schoolDirObj.schoolName.lowercase().contains(queries.lowercase()) ||
+                                schoolDirObj.ellPrograms.lowercase().contains(queries.lowercase()) ||
+                                schoolDirObj.diplomaendorsements.lowercase().contains(queries.lowercase())) {
+                                resultList.add(schoolDirObj)
+                            }
                         }
                     }
                     resultList

@@ -69,7 +69,7 @@ class SchoolDetailsAdapter: RecyclerView.Adapter<BaseViewHolder<*>>() {
         }
         override fun bindView(item: SchoolDirectoryObj) {
             this.schoolNameView?.let {
-                boldFirstWord(getFirstWord(item.schoolName!!).length, item.schoolName!!, it, false)
+                boldFirstWord(getFirstWord(item.schoolName).length, item.schoolName, it, false)
             }
             overviewView?.text = item.overviewParagraph
         }

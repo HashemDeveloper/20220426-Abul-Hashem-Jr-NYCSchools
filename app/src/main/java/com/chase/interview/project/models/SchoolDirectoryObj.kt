@@ -12,7 +12,7 @@ data class SchoolDirectoryObj(
     var dbn: String? = null,
 
     @SerializedName("school_name")
-    var schoolName: String? = null,
+    var schoolName: String="",
 
     @SerializedName("borocode")
     var borocode: String? = null,
@@ -21,7 +21,7 @@ data class SchoolDirectoryObj(
     var overviewParagraph: String? = null,
 
     @SerializedName("diplomaendorsements")
-    var diplomaendorsements: String? = null,
+    var diplomaendorsements: String = "",
 
     @SerializedName("academicopportunities1")
     var academicopportunities1: String? = null,
@@ -39,7 +39,7 @@ data class SchoolDirectoryObj(
     var academicopportunities5: String? = null,
 
     @SerializedName("ell_programs")
-    var ellPrograms: String? = null,
+    var ellPrograms: String = "",
 
     @SerializedName("language_classes")
     var languageClasses: String? = null,

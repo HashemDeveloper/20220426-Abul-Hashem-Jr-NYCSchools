@@ -49,6 +49,7 @@ class SchoolDirectoryPage : Fragment(), SchoolDirAdapter.SchoolDirItemActionList
         super.onViewCreated(view, savedInstanceState)
         schoolDirectoryPage_recyclerView_id.layoutManager = LinearLayoutManager(requireContext())
         schoolDirectoryPage_recyclerView_id.adapter = this.schoolDirListAdapter
+        schoolDirectoryPage_recyclerView_id?.itemAnimator = null
         getSchoolDirList(this.sharedViewModel.getFilterOption())
         setupPopUpFilter()
         setupSearch()
