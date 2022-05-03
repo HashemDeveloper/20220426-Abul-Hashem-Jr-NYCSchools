@@ -11,6 +11,8 @@ import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.repeatOnLifecycle
 import androidx.recyclerview.widget.LinearLayoutManager
 import boldFirstWord
+import com.bumptech.glide.Priority
+import com.chase.interview.project.BuildConfig
 import com.chase.interview.project.R
 import com.chase.interview.project.di.ui.withFactory
 import com.chase.interview.project.models.SatScoreDataObj
@@ -24,6 +26,7 @@ import getFirstWord
 import kotlinx.android.synthetic.main.fragment_school_directory_details_page.*
 import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.launch
+import timber.log.Timber
 import javax.inject.Inject
 
 class SchoolDirectoryDetailsPage : Fragment() {
@@ -62,16 +65,22 @@ class SchoolDirectoryDetailsPage : Fragment() {
                 sharedViewModel.satScoreResult.collect { state ->
                     when (state) {
                         is RequestState.Loading -> {
-                            this@SchoolDirectoryDetailsPage.schoolDetailsAdapter.setIsLoading(true)
+                            DETAILS_LIST.add(true)
+                            this@SchoolDirectoryDetailsPage.schoolDetailsAdapter.setData(
+                                DETAILS_LIST)
                         }
                         is RequestState.Success -> {
+                            DETAILS_LIST.removeAt(1)
                             val satScoreDataObj = state.data[0]
                             DETAILS_LIST.add(satScoreDataObj)
                             this@SchoolDirectoryDetailsPage.schoolDetailsAdapter.setData(
                                 DETAILS_LIST)
+
                         }
                         is RequestState.Error -> {
-                            print(state.error)
+                            if (BuildConfig.DEBUG) {
+                                Timber.d(state.error)
+                            }
                         }
                         else -> {}
                     }
