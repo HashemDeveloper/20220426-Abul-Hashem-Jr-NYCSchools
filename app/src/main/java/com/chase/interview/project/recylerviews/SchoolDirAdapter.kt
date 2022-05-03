@@ -89,7 +89,7 @@ class SchoolDirAdapter constructor(val listener: SchoolDirItemActionListener): R
                 filteredData = if (!(constraints == null || constraints.isEmpty())) {
                     val queries: String = constraints.toString()
                     for (schoolDirObj in dataList) {
-                        if (schoolDirObj.schoolEmail?.lowercase()?.contains(queries.lowercase())!! ||
+                        if (schoolDirObj.schoolName?.lowercase()?.contains(queries.lowercase())!! ||
                                 schoolDirObj.ellPrograms?.lowercase()?.contains(queries.lowercase())!! ||
                                 schoolDirObj.diplomaendorsements?.lowercase()?.contains(queries.lowercase())!!) {
                             resultList.add(schoolDirObj)
