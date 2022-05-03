@@ -2,4 +2,23 @@
     <string name="app_name">NYCSchools</string>
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="br_brooklyn">BROOKLYN</string>
+    <string name="pick_a_neighbor">PICK A NEIGHBOR</string>
+    <string name="br_queens">FLUSHING</string>
+    <string name="br_manhattan">MANHATTAN</string>
+    <string name="br_staten_island">STATEN ISLAND</string>
+    <string name="br_bronx">BRONX</string>
+    <string name="school_name">School Name</string>
+    <string name="address">Address</string>
+    <string name="phone_number">Phone</string>
+    <string name="fax">Fax</string>
+    <string name="email">Email</string>
+    <string name="learn_more">Learn More</string>
+    <string name="options">Options</string>
+    <string name="overview">Overview</string>
+    <string name="performance">Performance</string>
+    <string name="sat">SAT Scores</string>
+    <string name="math_score">Math Score</string>
+    <string name="reading_score">Reading Score</string>
+    <string name="writing_score">Writing Score</string>
 </resources>

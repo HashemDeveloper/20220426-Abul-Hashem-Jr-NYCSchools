@@ -8,5 +8,49 @@
         android:id="@+id/welcomePage"
         android:name="com.chase.interview.project.ui.WelcomePage"
         android:label="fragment_welcome_page"
-        tools:layout="@layout/fragment_welcome_page" />
+        tools:layout="@layout/fragment_welcome_page"
+        >
+        <action
+            android:id="@+id/action_welcomePage_to_schoolDirectoryPage"
+            app:destination="@id/schoolDirectoryPage"
+            app:enterAnim="@android:anim/fade_in"
+            app:exitAnim="@android:anim/fade_out"
+            app:popEnterAnim="@anim/nav_default_pop_enter_anim"
+            app:popExitAnim="@anim/nav_default_pop_exit_anim"
+            app:launchSingleTop="true"
+            app:popUpTo="@+id/welcomePage"
+            app:popUpToInclusive="true"
+            >
+        </action>
+    </fragment>
+    <fragment
+        android:id="@+id/schoolDirectoryPage"
+        android:name="com.chase.interview.project.ui.SchoolDirectoryPage"
+        android:label="fragment_school_directory_page"
+        tools:layout="@layout/fragment_school_directory_page">
+        <action
+            android:id="@+id/action_schoolDirectoryPage_to_schoolDirectoryDetailsPage"
+            app:destination="@id/schoolDirectoryDetailsPage"
+            app:enterAnim="@anim/nav_default_enter_anim"
+            app:exitAnim="@anim/nav_default_exit_anim"
+            app:popEnterAnim="@anim/nav_default_pop_enter_anim"
+            app:popExitAnim="@anim/nav_default_pop_exit_anim" />
+    </fragment>
+    <fragment
+        android:id="@+id/schoolDirectoryDetailsPage"
+        android:name="com.chase.interview.project.ui.SchoolDirectoryDetailsPage"
+        android:label="fragment_school_directory_details_page"
+        tools:layout="@layout/fragment_school_directory_details_page" >
+        <action
+            android:id="@+id/action_schoolDirectoryDetailsPage_to_schoolDirectoryPage"
+            app:destination="@id/schoolDirectoryPage"
+            app:enterAnim="@anim/nav_default_enter_anim"
+            app:exitAnim="@anim/nav_default_exit_anim"
+            app:popEnterAnim="@anim/nav_default_pop_enter_anim"
+            app:popExitAnim="@anim/nav_default_pop_exit_anim" />
+        <argument
+            android:name="SchoolDirectoryPage"
+            app:argType="com.chase.interview.project.models.SchoolDirectoryObj"
+            />
+    </fragment>
 </navigation>
