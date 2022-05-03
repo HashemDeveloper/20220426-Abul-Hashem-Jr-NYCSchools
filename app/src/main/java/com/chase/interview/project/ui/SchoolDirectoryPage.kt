@@ -6,6 +6,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.appcompat.widget.PopupMenu
+import androidx.appcompat.widget.SearchView
 import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.lifecycleScope
@@ -50,6 +51,18 @@ class SchoolDirectoryPage : Fragment(), SchoolDirAdapter.SchoolDirItemActionList
         schoolDirectoryPage_recyclerView_id.adapter = this.schoolDirListAdapter
         getSchoolDirList(this.sharedViewModel.getFilterOption())
         setupPopUpFilter()
+        setupSearch()
+    }
+    private fun setupSearch() {
+        schoolDirectoryPage_searchView_id?.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
+            override fun onQueryTextSubmit(query: String?): Boolean {
+                return false
+            }
+            override fun onQueryTextChange(newText: String?): Boolean {
+                schoolDirListAdapter.filter.filter(newText)
+                return false
+            }
+        })
     }
     private fun setupPopUpFilter() {
         val popupWindow = PopupMenu(requireContext(),schoolDirectoryPage_filter_bt_id)

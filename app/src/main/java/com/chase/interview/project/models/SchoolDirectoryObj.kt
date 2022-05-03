@@ -20,6 +20,9 @@ data class SchoolDirectoryObj(
     @SerializedName("overview_paragraph")
     var overviewParagraph: String? = null,
 
+    @SerializedName("diplomaendorsements")
+    var diplomaendorsements: String? = null,
+
     @SerializedName("academicopportunities1")
     var academicopportunities1: String? = null,
 

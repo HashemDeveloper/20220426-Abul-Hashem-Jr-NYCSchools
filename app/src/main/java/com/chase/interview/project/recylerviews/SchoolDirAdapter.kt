@@ -3,6 +3,8 @@ package com.chase.interview.project.recylerviews
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Filter
+import android.widget.Filterable
 import androidx.appcompat.widget.AppCompatTextView
 import androidx.recyclerview.widget.RecyclerView
 import boldFirstWord
@@ -12,9 +14,9 @@ import com.chase.interview.project.models.SchoolDirectoryObj
 import com.google.android.material.button.MaterialButton
 import getFirstWord
 
-class SchoolDirAdapter constructor(val listener: SchoolDirItemActionListener): RecyclerView.Adapter<BaseViewHolder<*>>() {
+class SchoolDirAdapter constructor(val listener: SchoolDirItemActionListener): RecyclerView.Adapter<BaseViewHolder<*>>(), Filterable {
     private val dataList: MutableList<SchoolDirectoryObj> = mutableListOf()
-
+    private var filteredData: MutableList<SchoolDirectoryObj> = this.dataList
     fun setData(list: MutableList<SchoolDirectoryObj>?) {
         list?.let {
             this.dataList.clear()
@@ -78,5 +80,42 @@ class SchoolDirAdapter constructor(val listener: SchoolDirItemActionListener): R
     }
     interface SchoolDirItemActionListener {
         fun onLearnMoreClicked(schoolDirectoryObj: SchoolDirectoryObj)
+    }
+
+    override fun getFilter(): Filter {
+        return object : Filter() {
+            override fun performFiltering(constraints: CharSequence?): FilterResults {
+                val resultList: MutableList<SchoolDirectoryObj> = mutableListOf()
+                filteredData = if (!(constraints == null || constraints.isEmpty())) {
+                    val queries: String = constraints.toString()
+                    for (schoolDirObj in dataList) {
+                        if (schoolDirObj.schoolEmail?.lowercase()?.contains(queries.lowercase())!! ||
+                                schoolDirObj.ellPrograms?.lowercase()?.contains(queries.lowercase())!! ||
+                                schoolDirObj.diplomaendorsements?.lowercase()?.contains(queries.lowercase())!!) {
+                            resultList.add(schoolDirObj)
+                        }
+                    }
+                    resultList
+                } else {
+                    dataList
+                }
+                val filters = FilterResults()
+                filters.values = filteredData
+                filters.count = filteredData.size
+                return filters
+            }
+
+            @Suppress("UNCHECKED_CAST")
+            override fun publishResults(constraints: CharSequence?, results: FilterResults?) {
+                if (results?.values != null) {
+                    val newData = results.values as ArrayList<*>
+                    if (newData.size > 0) {
+                        filteredData = newData as MutableList<SchoolDirectoryObj>
+                        notifyItemRangeRemoved(0, filteredData.size)
+                        notifyItemRangeInserted(0, newData.size)
+                    }
+                }
+            }
+        }
     }
 }
