@@ -70,12 +70,21 @@ class SchoolDirectoryDetailsPage : Fragment() {
                                 DETAILS_LIST)
                         }
                         is RequestState.Success -> {
-                            DETAILS_LIST.removeAt(1)
-                            val satScoreDataObj = state.data[0]
-                            DETAILS_LIST.add(satScoreDataObj)
-                            this@SchoolDirectoryDetailsPage.schoolDetailsAdapter.setData(
-                                DETAILS_LIST)
-
+                            if (state.data.isNotEmpty()) {
+                                val satScoreDataObj = state.data[0]
+                                DETAILS_LIST.add(2,satScoreDataObj)
+                                this@SchoolDirectoryDetailsPage.schoolDetailsAdapter.setData(
+                                    DETAILS_LIST)
+                                DETAILS_LIST.removeAt(1)
+                                this@SchoolDirectoryDetailsPage.schoolDetailsAdapter.setData(
+                                    DETAILS_LIST)
+                                this@SchoolDirectoryDetailsPage.schoolDetailsAdapter.notifyItemRemoved(1)
+                            } else {
+                                DETAILS_LIST.removeAt(1)
+                                this@SchoolDirectoryDetailsPage.schoolDetailsAdapter.setData(
+                                    DETAILS_LIST)
+                                this@SchoolDirectoryDetailsPage.schoolDetailsAdapter.notifyItemRemoved(1)
+                            }
                         }
                         is RequestState.Error -> {
                             if (BuildConfig.DEBUG) {
@@ -93,6 +102,6 @@ class SchoolDirectoryDetailsPage : Fragment() {
         DETAILS_LIST.clear()
     }
     companion object {
-        private val DETAILS_LIST: MutableList<Any> = mutableListOf()
+        private val DETAILS_LIST: MutableList<Any> = arrayListOf()
     }
 }

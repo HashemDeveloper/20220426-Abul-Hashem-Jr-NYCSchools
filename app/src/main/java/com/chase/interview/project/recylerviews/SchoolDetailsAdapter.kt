@@ -15,7 +15,7 @@ import getFirstWord
 import java.lang.IllegalArgumentException
 
 class SchoolDetailsAdapter: RecyclerView.Adapter<BaseViewHolder<*>>() {
-    private val data: MutableList<Any> = mutableListOf()
+    private var data: MutableList<Any> = arrayListOf()
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): BaseViewHolder<*> {
         return when (viewType) {
             HEADER_VIEW -> {
