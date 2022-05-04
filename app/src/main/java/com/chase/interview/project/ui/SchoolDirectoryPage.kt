@@ -100,7 +100,7 @@ class SchoolDirectoryPage : Fragment(), SchoolDirAdapter.SchoolDirItemActionList
     private fun getSchoolDirList(filterOption: String) {
         val neighbor: String = filterOption
         viewLifecycleOwner.lifecycleScope.launch {
-            viewLifecycleOwner.repeatOnLifecycle(Lifecycle.State.CREATED) {
+            viewLifecycleOwner.repeatOnLifecycle(Lifecycle.State.STARTED) {
                 sharedViewModel.schoolDirectories.map { m->
                     m?.results?.filter { v -> v.city == neighbor }?.toMutableList()
                 }.collect { l ->
