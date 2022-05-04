@@ -16,6 +16,7 @@
         <entry key="app/src/main/res/layout/school_details_page_header.xml" value="0.296875" />
         <entry key="app/src/main/res/layout/school_details_page_header_layout.xml" value="0.296875" />
         <entry key="app/src/main/res/layout/school_details_page_satscore_layout.xml" value="0.296875" />
+        <entry key="app/src/main/res/layout/school_details_page_satscore_loading_view_layout.xml" value="0.19655797101449277" />
         <entry key="app/src/main/res/layout/school_directory_list_item_view.xml" value="0.55372314453125" />
         <entry key="app/src/main/res/layout/school_directory_list_view.xml" value="0.1529888551165147" />
         <entry key="app/src/main/res/menu/school_dir_filter_options.xml" value="0.2421875" />

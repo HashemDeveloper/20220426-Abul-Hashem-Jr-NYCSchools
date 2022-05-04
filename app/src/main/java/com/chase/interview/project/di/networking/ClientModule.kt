@@ -57,6 +57,6 @@ object ClientModule {
     @Provides
     @Named("base_url")
     internal fun provideBaseUrl(): String {
-        return " https://data.cityofnewyork.us/resource/"
+        return "https://data.cityofnewyork.us/resource/"
     }
 }

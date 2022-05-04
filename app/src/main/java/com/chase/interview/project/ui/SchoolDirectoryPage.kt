@@ -76,7 +76,6 @@ class SchoolDirectoryPage : Fragment(), SchoolDirAdapter.SchoolDirItemActionList
         popupWindow.setOnMenuItemClickListener { item ->
             when (item.itemId) {
                 R.id.filter_brooklyn -> {
-                    print(item.title)
                     item.isChecked = true
                 }
                 R.id.filter_queens -> {
@@ -92,7 +91,6 @@ class SchoolDirectoryPage : Fragment(), SchoolDirAdapter.SchoolDirItemActionList
                     item.isChecked = true
                 }
             }
-            print(item.title)
             getSchoolDirList(item.title.toString())
             this.sharedViewModel.setFilterOption(item.title.toString())
             true
@@ -102,7 +100,7 @@ class SchoolDirectoryPage : Fragment(), SchoolDirAdapter.SchoolDirItemActionList
     private fun getSchoolDirList(filterOption: String) {
         val neighbor: String = filterOption
         viewLifecycleOwner.lifecycleScope.launch {
-            viewLifecycleOwner.repeatOnLifecycle(Lifecycle.State.STARTED) {
+            viewLifecycleOwner.repeatOnLifecycle(Lifecycle.State.CREATED) {
                 sharedViewModel.schoolDirectories.map { m->
                     m?.results?.filter { v -> v.city == neighbor }?.toMutableList()
                 }.collect { l ->
